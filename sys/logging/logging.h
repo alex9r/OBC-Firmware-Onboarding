@@ -25,6 +25,16 @@ typedef enum { LOG_TRACE, LOG_DEBUG, LOG_INFO, LOG_WARN, LOG_ERROR, LOG_FATAL, L
 #define LOG_FATAL(...) logLog(LOG_FATAL, __FILE__, __LINE__, __VA_ARGS__)
 
 #define LOG_ERROR_CODE(errCode) LOG_ERROR("Error code: %lu", (uint32_t)errCode)
+#define ERR_CODE_SUCCESS 0
+error_code_t errCode;
+error_code_t func(void) {
+  error_code_t errCode; // must be defined
+  LOG_IF_ERROR_CODE(functionA());
+	RETURN_IF_ERROR_CODE(functionB());
+
+  // we'd only get here if functionB was successful
+  return ERR_CODE_SUCCESS;
+}
 
 #define RETURN_IF_ERROR_CODE(_ret)         \
   do {                                     \

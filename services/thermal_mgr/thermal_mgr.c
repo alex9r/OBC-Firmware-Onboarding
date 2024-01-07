@@ -54,7 +54,13 @@ void osHandlerLM75BD(void) {
 static void thermalMgr(void *pvParameters) {
   /* Implement this task */
   while (1) {
-    
+    if (xQueueReceive(xPointerQueue, &(pxRxedStructure), ) == pdTRUE){
+      if (type == THERMAL_MGR_EVENT_MEASURE_TEMP_CMD){
+        float tempC;
+        addTemperatureTelemetry(readTempLM75BD())
+
+      }
+    }
   }
 }
 
